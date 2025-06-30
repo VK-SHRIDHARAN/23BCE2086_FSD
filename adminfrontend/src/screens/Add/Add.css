@@ -1,0 +1,103 @@
+/* Layout */
+.screen {
+  width: 70%;
+  margin-left: max(5vw, 25px);
+  margin-block: 50px;
+  color: #6d6d6d;
+  font-size: 1.6rem;
+}
+
+/* Curved Box Container */
+.container {
+  width: 400px; /* Or use 90% for responsiveness */
+  border: 1px solid var(--theme-color);
+  border-radius: 8px;
+  padding: 10px; /* Reduced padding as requested */
+  background-color: #fff;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.05);
+  margin: auto; /* Center the container */
+}
+
+
+/* Form Spacing */
+.form-section > div {
+  margin-bottom: 20px;
+}
+
+.flex-col {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+/* Image Upload */
+.add-img-upload img {
+  width: 120px;
+  cursor: pointer;
+}
+
+/* Input & Select Styling */
+.add-product-name input,
+.add-price input,
+.add-category select {
+  padding: 10px;
+  border: 1px solid var(--theme-color);
+  border-radius: 5px;
+  font-size: 1.4rem;
+  color: #333;
+}
+
+/* Reduce width of inputs and dropdown */
+.add-product-name input,
+.add-price input {
+  width: 250px;
+}
+
+.add-category select {
+  width: 200px;
+}
+
+/* Textarea - keep full width for better UX */
+.add-product-description textarea {
+  padding: 10px;
+  border: 1px solid var(--theme-color);
+  border-radius: 5px;
+  font-size: 1.4rem;
+  color: #333;
+  resize: none;
+  width: 100%;
+}
+
+/* Category + Price Side-by-Side */
+.add-category-price-row {
+  display: flex;
+  gap: 30px;
+  flex-wrap: wrap;
+}
+
+/* Remove flex to avoid stretching */
+/* width for .add-category and .add-price is defined individually above */
+
+/* Submit Button */
+.add-btn {
+  max-width: 120px;
+  padding: 10px;
+  border: none;
+  background-color: black;
+  color: white;
+  cursor: pointer;
+  border-radius: 5px;
+}
+
+/* Responsive layout for small screens */
+@media (max-width: 500px) {
+  .add-category-price-row {
+    flex-direction: column;
+  }
+
+  .add-product-name input,
+  .add-price input,
+  .add-category select {
+    width: 100%;
+  }
+}
