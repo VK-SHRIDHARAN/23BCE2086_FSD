@@ -1,10 +1,13 @@
-import { BrowserRouter } from 'react-router-dom'
 import { createRoot } from 'react-dom/client'
+import {BrowserRouter} from 'react-router-dom'
+import StoreContextProvider from './context/storeContext.jsx'
 import './index.css'
 import App from './App.jsx'
 
 createRoot(document.getElementById('root')).render(
-  <BrowserRouter>
-    <App />
-  </BrowserRouter>,
+    <StoreContextProvider>
+      <BrowserRouter>
+        <App />
+      </BrowserRouter>
+    </StoreContextProvider>
 )
