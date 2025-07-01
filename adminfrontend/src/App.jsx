@@ -7,7 +7,7 @@ import Orders from './screens/Orders/Orders'
 import React from 'react'
 import './App.css'
 
-const url  = 'http://localhost:4000'
+const url  = 'https://backend-ozpo.onrender.com'
 
 const App = () => {
   return (
