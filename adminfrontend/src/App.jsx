@@ -7,6 +7,8 @@ import Orders from './screens/Orders/Orders'
 import React from 'react'
 import './App.css'
 
+const url  = 'http://localhost:4000'
+
 const App = () => {
   return (
     <div className="app">
@@ -15,10 +17,10 @@ const App = () => {
       <div className="app-content">
         <Sidebar />
         <Routes>
-          <Route path='/' element={<Add />} />
-          <Route path='/add' element={<Add />} />
-          <Route path='/list' element={<List />} />
-          <Route path='/orders' element={<Orders />} />
+          <Route path='/' element={<Add url={url} />} />
+          <Route path='/add' element={<Add url={url} />} />
+          <Route path='/list' element={<List url={url} />} />
+          <Route path='/orders' element={<Orders url={url} />} />
         </Routes>
       </div>
     </div>

@@ -1,8 +1,10 @@
 import React, { useState } from 'react'
 import { assets } from '../../assets/assets'
 import './Add.css'
+import axios from 'axios'
+import { toast } from 'react-toastify'
 
-const Add = () => {
+const Add = ({url}) => {
   const [image, setImage] = useState(false)
 
   const [data, setData] = useState({
@@ -17,7 +19,7 @@ const Add = () => {
     setData((prev) => ({ ...prev, [name]: value }))
   }
 
-  const onSubmitHandler = (e) => {
+  const onSubmitHandler = async(e) => {
     e.preventDefault()
     const formData = new FormData()
     formData.append('name', data.name)
@@ -25,9 +27,19 @@ const Add = () => {
     formData.append('price', Number(data.price))
     formData.append('category', data.category)
     formData.append('image', image)
-
-    // Optional: You can log or send formData via fetch/axios here
-    console.log('Submitted:', Object.fromEntries(formData))
+    try {
+    const response = await axios.post(`${url}/api/food/add`, formData);
+    toast(response.data.message)
+    setData({
+        name: "",
+        description: "",
+        price: "",
+        category: "Salad",
+    });
+    setImage(false);
+} catch (error) {
+    toast(error.message)
+}
   }
 
   return (

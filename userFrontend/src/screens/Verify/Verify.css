@@ -1,0 +1,10 @@
+.verify-page {
+  min-height: 60vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 2rem;
+  font-weight: 600;
+  color: var(--theme-color);
+  text-align: center;
+}

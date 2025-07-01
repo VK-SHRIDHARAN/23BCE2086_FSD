@@ -1,0 +1,63 @@
+.orders-screen {
+  padding: 30px;
+  color: #333;
+}
+
+.orders-screen h2 {
+  font-size: 2rem;
+  margin-bottom: 20px;
+  border-bottom: 2px solid #eee;
+  padding-bottom: 10px;
+}
+
+.orders-container {
+  overflow-x: auto;
+}
+
+.orders-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 1.4rem;
+}
+
+.orders-table th,
+.orders-table td {
+  padding: 12px 16px;
+  text-align: left;
+  border-bottom: 1px solid #ddd;
+}
+
+.orders-table th {
+  background-color: #f8f8f8;
+  font-weight: 600;
+}
+
+.item-pill {
+  display: inline-block;
+  background-color: #f1f1f1;
+  padding: 4px 10px;
+  margin: 2px;
+  border-radius: 20px;
+  font-size: 1.2rem;
+}
+
+.status-badge {
+  padding: 6px 12px;
+  border-radius: 20px;
+  color: white;
+  font-weight: bold;
+  font-size: 1.2rem;
+}
+
+.status-badge.pending {
+  background-color: #ff9800;
+}
+
+.status-badge.delivered {
+  background-color: #4caf50;
+}
+
+.no-orders {
+  font-size: 1.4rem;
+  color: #777;
+}

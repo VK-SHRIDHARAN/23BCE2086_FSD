@@ -40,7 +40,6 @@
   background-color: #f9f9f9;
 }
 
-/* Cart Totals Header */
 .place-order-right h2 {
   font-size: 2.2rem;
   font-weight: 600;
@@ -49,24 +48,48 @@
   border-bottom: 2px solid #ddd;
 }
 
-/* Cart Totals Rows */
 .place-order-right .cart-total-details {
   display: flex;
   justify-content: space-between;
-  font-size: 1.5rem;         /* ⬅️ Increased from 1.1rem */
+  font-size: 1.5rem;
   font-weight: 500;
   color: #333;
-  margin: 20px 0;            /* More spacing */
+  margin: 20px 0;
 }
 
-/* Highlight the Total row */
-.place-order-right .cart-total-details:last-of-type {
-  font-size: 1.5rem;
-  font-weight: 600;
-  color: #111;
+.place-order-right .cart-total-details.total {
+  font-weight: 700;
+  font-size: 1.6rem;
+  color: #000;
 }
 
-.place-order .cart-total button {
+.place-order-right .cart-total-details.discount {
+  color: #28a745;
+}
+
+.place-order-right .coupon-input {
+  display: flex;
+  gap: 10px;
+  margin-top: 15px;
+}
+
+.place-order-right .coupon-input input {
+  flex: 1;
+  padding: 10px;
+  border-radius: 4px;
+  border: 1px solid #ccc;
+}
+
+.place-order-right .coupon-input button {
+  padding: 10px 15px;
+  background-color: var(--theme-color);
+  color: #fff;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.place-order-right button[type="submit"] {
   margin-top: 30px;
   padding: 12px 0;
   width: 100%;

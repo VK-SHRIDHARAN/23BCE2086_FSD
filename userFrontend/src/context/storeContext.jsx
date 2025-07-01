@@ -1,41 +1,61 @@
-import { useState, createContext } from 'react'
-import { food_list } from '../assets/assets.js'
+import { useState, createContext, useEffect } from 'react';
+import { food_list } from '../assets/assets.js';
 
 export const StoreContext = createContext();
 
 const StoreContextProvider = (props) => {
-  const [cartItems, setCartItems] = useState({});
+  const [cartItems, setCartItems] = useState(() => {
+    const savedCart = localStorage.getItem("cartItems");
+    return savedCart ? JSON.parse(savedCart) : {};
+  });
+
+  const [coupon, setCoupon] = useState(null);
+
+  // Save cart to localStorage whenever it changes
+  useEffect(() => {
+    localStorage.setItem("cartItems", JSON.stringify(cartItems));
+  }, [cartItems]);
 
   const addToCart = (itemId) => {
-    if (cartItems[itemId]) {
-      setCartItems({ ...cartItems, [itemId]: cartItems[itemId] + 1 });
-    } else {
-      setCartItems({ ...cartItems, [itemId]: 1 });
-    }
+    setCartItems((prev) => ({
+      ...prev,
+      [itemId]: (prev[itemId] || 0) + 1
+    }));
   };
 
   const removeFromCart = (itemId) => {
-    if (!cartItems[itemId]) return;
-    if (cartItems[itemId] === 1) {
-      const updatedCart = { ...cartItems };
-      delete updatedCart[itemId];
-      setCartItems(updatedCart);
+    setCartItems((prev) => {
+      const updated = { ...prev };
+      if (!updated[itemId]) return prev;
+      if (updated[itemId] === 1) delete updated[itemId];
+      else updated[itemId] -= 1;
+      return updated;
+    });
+  };
+
+  const clearCart = () => setCartItems({});
+
+  const getTotalCartAmount = () => {
+    return Object.entries(cartItems).reduce((total, [id, qty]) => {
+      const item = food_list.find((food) => food._id === id);
+      return item ? total + item.price * qty : total;
+    }, 0);
+  };
+
+  const applyCoupon = (code) => {
+    const upperCode = code.trim().toUpperCase();
+    if (upperCode === "SAVE10") {
+      setCoupon({ code: "SAVE10", discount: 10 }); // 10% off
+      return { success: true, message: "Coupon applied: 10% off" };
     } else {
-      setCartItems({ ...cartItems, [itemId]: cartItems[itemId] - 1 });
+      setCoupon(null);
+      return { success: false, message: "Invalid coupon code" };
     }
   };
 
-  const getTotalCartAmount = () => {
-    let total = 0;
-    for (let itemId in cartItems) {
-      if (cartItems[itemId] > 0) {
-        const itemInfo = food_list.find(food => food._id === itemId);
-        if (itemInfo) {
-          total += itemInfo.price * cartItems[itemId];
-        }
-      }
-    }
-    return total;
+  const getDiscountAmount = () => {
+    const subtotal = getTotalCartAmount();
+    return coupon ? Math.floor((subtotal * coupon.discount) / 100) : 0;
   };
 
   const contextValues = {
@@ -44,7 +64,11 @@ const StoreContextProvider = (props) => {
     setCartItems,
     addToCart,
     removeFromCart,
-    getTotalCartAmount
+    clearCart,
+    getTotalCartAmount,
+    applyCoupon,
+    coupon,
+    getDiscountAmount
   };
 
   return (

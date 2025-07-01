@@ -1,8 +1,9 @@
-import { StoreContext } from "../../context/storeContext"
-import { useContext } from "react"
+import { useContext, useState } from "react";
+import { StoreContext } from "../../context/storeContext";
 import { useNavigate } from "react-router-dom";
 import { assets } from "../../assets/assets";
-import "./Cart.css"; // If needed, make sure you have CSS to style cart
+import "./Cart.css";
+import toast from "react-hot-toast";
 
 const Cart = () => {
   const {
@@ -11,9 +12,19 @@ const Cart = () => {
     removeFromCart,
     addToCart,
     getTotalCartAmount,
+    applyCoupon,
+    coupon,
+    getDiscountAmount,
   } = useContext(StoreContext);
 
   const navigate = useNavigate();
+  const [promoInput, setPromoInput] = useState("");
+
+  const handleApplyCoupon = () => {
+    const result = applyCoupon(promoInput);
+    toast[result.success ? "success" : "error"](result.message);
+  };
+
   return (
     <div className="cart">
       <div className="cart-items-title">
@@ -55,25 +66,38 @@ const Cart = () => {
         return null;
       })}
 
-      {/* Bottom Section: Cart Totals (Left), Promo Code (Right) */}
       <div className="cart-bottom">
         {/* Cart Totals - LEFT */}
         <div className="cart-total">
           <h2>Cart Totals</h2>
+
           <div className="cart-total-details">
             <p>Subtotal</p>
             <p>₹{getTotalCartAmount()}</p>
           </div>
-          <hr />
+
+          {coupon && (
+            <div className="cart-total-details">
+              <p>Coupon ({coupon.code})</p>
+              <p>- ₹{getDiscountAmount()}</p>
+            </div>
+          )}
+
           <div className="cart-total-details">
             <p>Delivery Fee</p>
             <p>₹{getTotalCartAmount() === 0 ? 0 : 20}</p>
           </div>
-          <hr />
+
           <div className="cart-total-details">
-            <p>Total</p>
-            <p>₹{getTotalCartAmount() === 0 ? 0 : getTotalCartAmount() + 20}</p>
+            <p><strong>Total</strong></p>
+            <p>
+              ₹
+              {getTotalCartAmount() === 0
+                ? 0
+                : getTotalCartAmount() + 20 - getDiscountAmount()}
+            </p>
           </div>
+
           <button onClick={() => navigate("/order")}>Proceed to Checkout</button>
         </div>
 
@@ -81,8 +105,15 @@ const Cart = () => {
         <div className="cart-promocode">
           <p>If you have a promo code, enter it here</p>
           <div className="cart-promocode-input">
-            <input type="text" placeholder="Enter promo code" />
-            <button>Apply</button>
+            <input
+              type="text"
+              placeholder="Enter promo code"
+              value={promoInput}
+              onChange={(e) => setPromoInput(e.target.value)}
+            />
+            <button type="button" onClick={handleApplyCoupon}>
+              Apply
+            </button>
           </div>
         </div>
       </div>
@@ -91,3 +122,4 @@ const Cart = () => {
 };
 
 export default Cart;
+
