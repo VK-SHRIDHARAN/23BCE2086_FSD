@@ -17,7 +17,7 @@ services:
       - key: STRIPE_SECRET_KEY
         value: "<SET_IN_DASHBOARD>"
       - key: FRONTEND_URL
-        value: "<SET_IN_DASHBOARD>"
+        value: "https://food-prep-frontend.onrender.com"
 
   - type: static_site
     name: foodprep-user-frontend
@@ -42,4 +42,3 @@ services:
     envVars:
       - key: VITE_API_URL
         value: "<SET_IN_DASHBOARD>"
->>>>>>> cf72f68 (Add Render manifest and parameterize frontends (VITE_API_URL); add backend start script)
