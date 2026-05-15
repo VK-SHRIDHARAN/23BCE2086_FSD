@@ -1,0 +1,51 @@
+# Render service definitions for this repository.
+#
+# After adding this file, go to Render dashboard → New → "Import from Render YAML"
+# and follow prompts to create the services. Replace placeholder env values in the
+# Render dashboard (do NOT commit secrets here).
+
+services:
+  - type: web_service
+    name: foodprep-backend
+    repo: VK-SHRIDHARAN/23BCE2086_FSD
+    branch: main
+    env: node
+    plan: free
+    region: oregon
+    root: backend
+    buildCommand: npm ci
+    startCommand: npm start
+    # Environment variables: set these in the Render dashboard after creating the service
+    envVars:
+      - key: DB_URI
+        value: "<SET_IN_DASHBOARD>"
+      - key: JWT_TOKEN_SECRET
+        value: "<SET_IN_DASHBOARD>"
+      - key: STRIPE_SECRET_KEY
+        value: "<SET_IN_DASHBOARD>"
+      - key: FRONTEND_URL
+        value: "<SET_IN_DASHBOARD>"
+
+  - type: static_site
+    name: foodprep-user-frontend
+    repo: VK-SHRIDHARAN/23BCE2086_FSD
+    branch: main
+    plan: free
+    root: userFrontend
+    buildCommand: npm ci && npm run build
+    publish: dist
+    envVars:
+      - key: VITE_API_URL
+        value: "<SET_IN_DASHBOARD>"
+
+  - type: static_site
+    name: foodprep-admin-frontend
+    repo: VK-SHRIDHARAN/23BCE2086_FSD
+    branch: main
+    plan: free
+    root: adminfrontend
+    buildCommand: npm ci && npm run build
+    publish: dist
+    envVars:
+      - key: VITE_API_URL
+        value: "<SET_IN_DASHBOARD>"

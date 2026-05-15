@@ -1,0 +1,23 @@
+name: Deploy Admin Frontend to Render
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - 'adminfrontend/**'
+      - '.github/workflows/admin-frontend-deploy.yml'
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      
+      - name: Deploy Admin Frontend to Render
+        env:
+          RENDER_DEPLOY_HOOK: ${{ secrets.RENDER_ADMIN_FRONTEND_DEPLOY_HOOK }}
+        run: |
+          if [ -n "$RENDER_DEPLOY_HOOK" ]; then
+            curl "$RENDER_DEPLOY_HOOK"
+          fi

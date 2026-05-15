@@ -1,5 +1,3 @@
-.app-content {
-  display: flex;
-  background-color: #fafbfc;
-  min-height: 100vh;
+.app-content{
+    display: flex;
 }

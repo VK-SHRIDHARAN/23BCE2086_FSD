@@ -1,41 +1,43 @@
-import { useEffect, useContext } from 'react';
-import { useNavigate, useSearchParams } from 'react-router-dom';
-import { StoreContext } from '../../context/storeContext';
-import './Verify.css';
+import {useContext,useEffect} from 'react'
+import './Verify.css'
+import axios from 'axios'
+import {StoreContext} from '../../context/StoreContext'
+import {useSearchParams,useNavigate} from 'react-router-dom'
+import Loader from '../../components/Loader/Loader'
 
 const Verify = () => {
-  const [searchParams] = useSearchParams();
-  const { clearCart } = useContext(StoreContext);
-  const navigate = useNavigate();
 
-  useEffect(() => {
-    const success = searchParams.get('success');
-    const orderId = searchParams.get('orderId');
+    
 
-    const verifyOrder = async () => {
-      const response = await fetch(`${import.meta.env.VITE_API_URL}/api/order/verify`, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ success, orderId })
-      });
+    const [searachParams,setSearchParams] = useSearchParams()
 
-      const data = await response.json();
-      if (success === 'true') {
-        clearCart();
-        navigate('/order-success');
-      } else {
-        navigate('/');
-      }
-    };
+    const success = searachParams.get("success")
+    const orderId = searachParams.get("orderId")
 
-    verifyOrder();
-  }, []);
+    const navigate = useNavigate()
+
+    console.log(success,orderId)
+    const {url} =useContext(StoreContext)
+
+    const verifyPayment = async()=>{
+        try { 
+            const response = await axios.post(url+"/api/order/verify",{success,orderId})
+            if(response.data.message==='Not paid')
+                navigate('/')//res
+            else
+                navigate('/myorders')
+        } catch (error) {
+            console.log(error);
+        }
+    }
+
+    useEffect(()=>{
+        verifyPayment()
+    },[])
 
   return (
-    <div className="verify-page">
-      <h2>Verifying your order...</h2>
-    </div>
-  );
-};
+    <Loader/>
+  )
+}
 
-export default Verify;
+export default Verify

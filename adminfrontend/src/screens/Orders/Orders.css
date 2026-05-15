@@ -1,63 +1,28 @@
-.orders-screen {
-  padding: 30px;
-  color: #333;
+.order-item{
+    display:grid;
+    grid-template-columns:0.5fr 2fr 1fr 1fr 1fr;
+    align-items: start;
+    gap:30px;
+    border: 1px solid var(--theme-color);
+    padding:20px;
+    margin-block: 30px;
+    font-size: 1.4rem;
+    color:#505050;
 }
-
-.orders-screen h2 {
-  font-size: 2rem;
-  margin-bottom: 20px;
-  border-bottom: 2px solid #eee;
-  padding-bottom: 10px;
+.order-item-food, .order-item-name{
+    font-weight: 600;
 }
-
-.orders-container {
-  overflow-x: auto;
+.order-item-name{
+    margin-top: 30;
+    margin-bottom: 5px;
 }
-
-.orders-table {
-  width: 100%;
-  border-collapse: collapse;
-  font-size: 1.4rem;
+.order-item-address{
+    margin-bottom:10px;
 }
-
-.orders-table th,
-.orders-table td {
-  padding: 12px 16px;
-  text-align: left;
-  border-bottom: 1px solid #ddd;
-}
-
-.orders-table th {
-  background-color: #f8f8f8;
-  font-weight: 600;
-}
-
-.item-pill {
-  display: inline-block;
-  background-color: #f1f1f1;
-  padding: 4px 10px;
-  margin: 2px;
-  border-radius: 20px;
-  font-size: 1.2rem;
-}
-
-.status-badge {
-  padding: 6px 12px;
-  border-radius: 20px;
-  color: white;
-  font-weight: bold;
-  font-size: 1.2rem;
-}
-
-.status-badge.pending {
-  background-color: #ff9800;
-}
-
-.status-badge.delivered {
-  background-color: #4caf50;
-}
-
-.no-orders {
-  font-size: 1.4rem;
-  color: #777;
+.order-item-select{
+    background-color: #ffe8e4;
+    border:1px solid var(--theme-color);
+    width:max(11vw,120px);
+    padding: 10px;
+    outline: none;
 }

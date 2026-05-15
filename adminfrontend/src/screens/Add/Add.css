@@ -1,155 +1,59 @@
-/* Layout */
-.screen {
-  width: 70%;
-  margin-left: max(5vw, 25px);
-  margin-block: 50px;
-  color: #3f3f3f;
-  font-size: 1.6rem;
-  animation: fadeIn 0.3s ease;
+.screen{
+    width:70%;
+    margin-left: max(5vw,25px);
+    margin-block: 50px;
+    color:#6d6d6d;
+    font-size: 1.6rem;
+}
+.container{
+    place-self: center;
+    width: max(40%,300px);
+    border: 1px solid var(--theme-color);
+    border-radius: 2%;
+    padding: 5%;
 }
 
-/* Container */
-.container {
-  max-width: 450px;
-  margin: auto;
-  padding: 20px;
-  background-color: #ffffff;
-  border: 1px solid #ddd;
-  border-radius: 12px;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+.screen form{
+    gap:20px;
 }
 
-/* Common Form Styles */
-.form-section > div {
-  margin-bottom: 20px;
+.add-img-upload img{
+    width: 120px;
+    cursor: pointer;
 }
-
-.flex-col {
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
+.add-category{
+    min-width: 125px;
 }
-
-/* Image Upload */
-.add-img-upload img {
-  width: 130px;
-  height: 130px;
-  object-fit: cover;
-  border-radius: 8px;
-  cursor: pointer;
-  border: 2px dashed #ccc;
-  transition: transform 0.3s ease;
-}
-
-.add-img-upload img:hover {
-  transform: scale(1.05);
-}
-
-/* Inputs & Selects */
-input,
-textarea,
-select {
-  padding: 10px 14px;
-  border-radius: 6px;
-  border: 1px solid #ccc;
-  font-size: 1.3rem;
-  transition: border-color 0.2s, box-shadow 0.2s;
-}
-
-input:focus,
-textarea:focus,
-select:focus {
-  border-color: #333;
-  outline: none;
-  box-shadow: 0 0 0 2px rgba(0, 0, 0, 0.05);
-}
-
 .add-product-name input,
-.add-price input {
-  width: 100%;
+.add-product-description textarea,
+.add-price input,
+.add-category select{
+    padding:10px;
+    border: 1px solid var(--theme-color);
+    border-radius: 5px;
+    font-size: 1.4rem;
+    color:#333;
 }
 
-.add-category select {
-  width: 100%;
+.add-product-description textarea{
+    resize: none;
 }
 
-textarea {
-  resize: none;
-  width: 100%;
+.add-btn{
+    max-width: 120px;
+    padding: 10px;
+    border: none;
+    background-color: black;
+    color:white;
+    cursor: pointer;
+    border-radius: 5px;
 }
 
-/* Category & Price in a Row */
-.add-category-price-row {
-  display: flex;
-  gap: 20px;
-  flex-wrap: wrap;
+.add-category-price{
+    display: flex;
+    gap:30px
 }
 
-/* Submit Button */
-.add-btn {
-  padding: 12px;
-  background-color: #2b4eff;
-  color: #fff;
-  font-size: 1.4rem;
-  border: none;
-  border-radius: 6px;
-  cursor: pointer;
-  transition: background 0.3s;
-}
-
-.add-btn:hover {
-  background-color: #1f39c5;
-}
-
-/* Responsive Layout */
-@media (max-width: 600px) {
-  .screen {
-    width: 90%;
-    margin: 20px auto;
-  }
-
-  .add-category-price-row {
-    flex-direction: column;
-  }
-}
-
-/* Smooth entry animation */
-@keyframes fadeIn {
-  from {
-    opacity: 0;
-    transform: translateY(12px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-/* Spinner Button State */
-.add-btn[disabled] {
-  background-color: #a0a0a0;
-  cursor: not-allowed;
-}
-
-/* Toast Message */
-.toast {
-  margin-top: 20px;
-  background-color: #d4edda;
-  color: #155724;
-  padding: 12px 16px;
-  border-radius: 6px;
-  font-size: 1.4rem;
-  text-align: center;
-  animation: fadeSlide 0.4s ease;
-  border: 1px solid #c3e6cb;
-}
-
-@keyframes fadeSlide {
-  from {
-    opacity: 0;
-    transform: translateY(10px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
+.add-price input{
+    width: 100%;
 }

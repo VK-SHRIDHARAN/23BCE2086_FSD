@@ -1,28 +1,12 @@
-.navbar {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 12px 5%;
-    background-color: #ffffff;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+.navbar{
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 8px 4%;
 }
-
-.navbar .logo {
-    width: 160px;
-    transition: transform 0.3s;
+.navbar .logo{
+  width: max(10%,200px);
 }
-
-.navbar .logo:hover {
-    transform: scale(1.05);
-}
-
-.navbar .profile {
-    width: 45px;
-    border-radius: 50%;
-    border: 2px solid #eee;
-    transition: transform 0.3s ease;
-}
-
-.navbar .profile:hover {
-    transform: rotate(5deg);
+.navbar .profile{
+  width:40px;
 }

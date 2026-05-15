@@ -1,35 +1,36 @@
-import { Routes, Route } from 'react-router-dom';
-import Navbar from './Components/Navbar/Navbar';
-import Cart from './screens/Cart/Cart';
-import Home from './screens/Home/Home';
-import PlaceOrder from './screens/PlaceOrder/PlaceOrder';
-import OrderSuccess from './screens/OrderSuccess/OrderSuccess';
-import Verify from './screens/Verify/Verify'; // ✅ Add this line
-import Footer from './Components/Footer/Footer';
-import LoginPopup from './Components/LoginPopup/LoginPopup';
-import './App.css';
-import { useState } from 'react';
-import { Toaster } from 'react-hot-toast';
+import {useState} from 'react'
+import Navbar from './components/Navbar/Navbar'
+import { Routes,Route } from'react-router-dom'
+import Home from './screens/Home/Home'
+import MyOrders from './screens/MyOrders/MyOrders'
+import Cart from './screens/Cart/Cart'
+import Verify from './screens/Verify/Verify'
+import PlaceOrder from './screens/PlaceOrder/PlaceOrder'
+import Footer from './components/Footer/Footer'
+import LoginPopup from './components/LoginPopup/LoginPopup'
+import {ToastContainer} from 'react-toastify'
 
 const App = () => {
-  const [showLogin, setShowLogin] = useState(false);
+
+  const [showLogin,setShowLogin] = useState(false)
 
   return (
-    <div className="app">
-      <Toaster position="top-center" reverseOrder={false} />
-      {showLogin && <LoginPopup setShowLogin={setShowLogin} />}
-      <Navbar setShowLogin={setShowLogin} />
-      <Routes>
-        <Route path="/" element={<Home />} />
-        <Route path="/cart" element={<Cart />} />
-        <Route path="/order" element={<PlaceOrder />} />
-        <Route path="/order-success" element={<OrderSuccess />} />
-        <Route path="/verify" element={<Verify />} /> {/* ✅ Add this route */}
-      </Routes>
-      <Footer />
-    </div>
-  );
-};
+    <>
+      <ToastContainer/>
+      {showLogin?<LoginPopup setShowLogin={setShowLogin}/>:<></>}
+      <div className='app'>
+        <Navbar showLogin={showLogin} setShowLogin={setShowLogin} />
+        <Routes>
+          <Route path='/' element={<Home/>}></Route>
+          <Route path='/cart' element={<Cart/>}></Route>
+          <Route path='/order' element={<PlaceOrder/>}></Route>
+          <Route path='verify' element={<Verify />}></Route>
+          <Route path='/myorders' element={<MyOrders />}></Route>
+        </Routes>
+      </div>
+      <Footer/>
+    </>
+  )
+}
 
-export default App;
-
+export default App
